@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Dashboard from "./pages/Dashboard"
 import ProtectedRoute from "./routes/ProtectedRoute"
+import Landing from "./pages/LandingPage"
 
 function App() {
 
@@ -10,7 +11,7 @@ function App() {
     <>
       <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Navigate to="/login"/>}/>
+        <Route path='/' element={<Landing/>}/>
 
         <Route path='/login' element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
