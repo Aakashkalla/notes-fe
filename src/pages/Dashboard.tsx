@@ -47,6 +47,20 @@ const Dashboard = () => {
         }
     }
 
+    async function deleteNote(noteId : string){
+        setError(null);
+        setLoading(true);
+
+        try{
+            await api.delete(`/notes/${noteId}`)
+            setNotes((prev)=>prev.filter((note)=>note._id!==noteId));
+        }catch(e){
+            setError("Failed to delete Note")
+        }finally{
+            setLoading(false);
+        }   
+    }
+
     useEffect(()=>{
         const fetchNotes = async () =>{
             setLoading(true);
@@ -73,6 +87,9 @@ const Dashboard = () => {
                 <div key={note._id}>
                     <h3>{note.title}</h3>
                     <h3>{note.content}</h3>
+                    <button onClick={()=>deleteNote(note._id)} disabled={loading}>
+                        Delete
+                    </button>
                 </div>
             ))}
 
