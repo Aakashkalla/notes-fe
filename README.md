@@ -1,73 +1,81 @@
-# React + TypeScript + Vite
+# 📝 Notes App – Frontend
+This repository contains the frontend for the Notes application built using React and TypeScript.
+It consumes the backend API and handles routing, UI, and protected views.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+--- 
 
-Currently, two official plugins are available:
+## 🚀 Features
+- User login and registration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Cookie-based authentication (no token handling in frontend)
 
-## React Compiler
+- Protected dashboard route
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Notes creation and deletion
 
-## Expanding the ESLint configuration
+- Optimistic UI updates
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Responsive and clean UI
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Landing page for first-time users
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧠 Authentication Flow
+- Frontend sends credentials to backend on login
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Backend sets JWT in an httpOnly cookie
+
+- Browser automatically sends cookie with every request
+
+- Protected routes are guarded using /auth/me
+
+- Frontend never accesses JWT directly
+---
+
+## Project Structure
+```text
+src/
+|-lib
+  |-axios.ts
+|-pages
+  |-Dashboard.tsx
+  |-LandingPage.tsx
+  |-Login.tsx
+  |-Register.tsx
+|-routes
+  |-ProtectedRoute.tsx
+|-App.tsx
+|-index.css
+|-main.tsx
 ```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Tech Stack
+- React
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- TypeScript
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Tailwind CSS
+
+- Axios
+
+- React Router
+---
+
+## Running the Frontend
+```bash
+npm install
+npm run dev
 ```
+Make sure backend is running and Axios base URL is configured correctly.
+
+---
+
+## 📌 Notes
+- Axios is configured with withCredentials: true
+
+- UI updates locally after create/delete actions
+
+- Authentication handled entirely via cookies
+
+- Clean separation from backend logic
